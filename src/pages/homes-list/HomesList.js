@@ -15,11 +15,12 @@ import {TombstoneLoader} from '../../components'
  * Also renders the list of homes that is returned.
  */
 export const HomesList = () => {
-  const [ loading, setLoading ] = useState(true)
+  const [ loading, setLoading ] = useState(false)
   const [ likedHomes, setLikedHomes ] = useState([])
 
   useEffect(() => {
     const getProperties = async () => {
+      setLoading(true)
       try {
         var encodedBasicAuth = Buffer.from('simplyrets:simplyrets').toString('base64');
         const response = await browserFetch({
@@ -37,7 +38,10 @@ export const HomesList = () => {
         setLoading(false)
       }
     }
-    getProperties()
+    const cachedProperties = readFromCache(PROPERTIES_CACHE_URL);
+    if (!cachedProperties) {
+      getProperties()
+    }
   }, [])
 
   // handles the click on a heart and adds or removes it fro mthe list
