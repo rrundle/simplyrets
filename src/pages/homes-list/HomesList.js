@@ -92,7 +92,7 @@ export const HomesList = () => {
                     listPrice,
                     mlsId
                   } = property
-                  const liked = likedHomes.includes(mlsId)
+                  const liked = readFromCache(LIKED_PROPERTIES_CACHE_URL).includes(mlsId)
                   return (
                     <div key={`property-list-item-${i}`}>
                       <HomeCard mlsId={mlsId}
@@ -105,7 +105,8 @@ export const HomesList = () => {
                         address={address}
                         listingDate={listDate}
                         liked={liked}
-                        onHeartClick={onHeartClick} />
+                        onHeartClick={onHeartClick}
+                        likedHomes={likedHomes} />
                     </div>
                   )
                 })

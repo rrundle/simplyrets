@@ -14,7 +14,8 @@ export const HomeCard = ({
   listingDate,
   mlsId,
   liked,
-  onHeartClick
+  onHeartClick,
+  likedHomes
 }) => {
   const totalBathCount = bathCount(fullBaths, halfBaths)
   const formattedPrice  = formatHomePrice(price)
